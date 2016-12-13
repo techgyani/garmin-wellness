@@ -1,0 +1,13 @@
+{
+  "name": "bhupendra-mp/garmin-wellness",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4.0",
+    "league/oauth1-client": "~1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mechant\\OAuth1\\Client\\Server\\": "src/"
+    }
+  }
+}
