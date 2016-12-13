@@ -7,7 +7,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Mechant\\OAuth1\\Client\\Server\\": "src/"
+      "bhupendraMp\\OAuth1\\Client\\Server\\": "src/"
     }
   }
 }
