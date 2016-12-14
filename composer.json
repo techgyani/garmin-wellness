@@ -1,5 +1,5 @@
 {
-  "name": "bhupendra-mp/garmin-wellness",
+  "name": "techgyani/garmin-wellness",
   "description" : "Oauth 1.0 adapter for garmin-wellness",
   "license": "MIT",
   "require": {
@@ -8,7 +8,7 @@
   },
   "autoload": {
     "psr-4": {
-      "bhupendraMp\\OAuth1\\Client\\Server\\": "src/"
+      "techgyani\\OAuth1\\Client\\Server\\": "src/"
     }
   }
 }
