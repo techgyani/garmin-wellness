@@ -2,7 +2,7 @@
 require_once '../vendor/autoload.php';
 
 
-$server = new bhupendraMp\OAuth1\Client\Server\Garmin([
+$server = new techgyani\OAuth1\Client\Server\Garmin([
     'identifier' => getenv('consumerKey'),
     'secret' => getenv('consumerSecret'),
     'callback_uri' => getenv('callback_uri'),
