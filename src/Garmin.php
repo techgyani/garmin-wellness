@@ -1,5 +1,5 @@
 <?php
- namespace bhupendraMp\OAuth1\Client\Server;
+ namespace techgyani\OAuth1\Client\Server;
 
 use League\Oauth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Server\Server;
