@@ -1,5 +1,5 @@
 {
-  "name": "bhupendra-mp/garmin-wellness",
+  "name": "bhupendraMp/garmin-wellness",
   "description" : "Oauth 1.0 adapter for garmin-wellness",
   "license": "MIT",
   "require": {
