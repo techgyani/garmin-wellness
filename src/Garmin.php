@@ -1,9 +1,8 @@
 <?php
- namespace techgyani\OAuth1\Client\Server;
+namespace techgyani\OAuth1\Client\Server;
 
 use League\Oauth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Server\Server;
-use League\OAuth1\Client\Server\User;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
 use GuzzleHttp\Exception\BadResponseException;
 use League\OAuth1\Client\Credentials\CredentialsInterface;
@@ -46,100 +45,6 @@ class Garmin extends Server
     }
 
     /**
-     * Get the URL for retrieving user details.
-     *
-     * @return string
-     */
-    public function urlUserDetails()
-    {
-        return self::API_URL . "users";
-    }
-
-    /**
-     * Take the decoded data from the user details URL and convert
-     * it to a User object.
-     *
-     * @param mixed $data
-     * @param TokenCredentials $tokenCredentials
-     *
-     * @return User
-     */
-    public function userDetails($data, TokenCredentials $tokenCredentials)
-    {
-        $user = new User;
-
-        $arraySearchAndDestroy = function (array &$array, $key) {
-            if (!array_key_exists($key, $array)) {
-                return null;
-            }
-
-            $value = $array[$key];
-            unset($array[$key]);
-            return $value;
-        };
-
-        $user->uid = $arraySearchAndDestroy($data['user'], 'id');
-        $user->nickname = $arraySearchAndDestroy($data['user'], 'username');
-        $user->firstName = $arraySearchAndDestroy($data['user'], 'firstname');
-        $user->lastName = $arraySearchAndDestroy($data['user'], 'lastname');
-        $user->name = $arraySearchAndDestroy($data['user'], 'fullname');
-        $user->email = $arraySearchAndDestroy($data['user'], 'email');
-        $user->location = [
-            'city'    => $arraySearchAndDestroy($data['user'], 'city'),
-            'state'   => $arraySearchAndDestroy($data['user'], 'state'),
-            'country' => $arraySearchAndDestroy($data['user'], 'country')
-        ];
-        $user->description = $arraySearchAndDestroy($data['user'], 'about');
-        $user->imageUrl = $arraySearchAndDestroy($data['user'], 'userpic_https_url');
-        $user->urls = $arraySearchAndDestroy($data['user'], 'domain');
-        $user->extra = (array) $data['user'];
-
-        return $user;
-    }
-
-    /**
-     * Take the decoded data from the user details URL and extract
-     * the user's UID.
-     *
-     * @param mixed $data
-     * @param TokenCredentials $tokenCredentials
-     *
-     * @return string|int
-     */
-    public function userUid($data, TokenCredentials $tokenCredentials)
-    {
-        return $data['user']['id'];
-    }
-
-    /**
-     * Take the decoded data from the user details URL and extract
-     * the user's email.
-     *
-     * @param mixed $data
-     * @param TokenCredentials $tokenCredentials
-     *
-     * @return string
-     */
-    public function userEmail($data, TokenCredentials $tokenCredentials)
-    {
-        return $data['user']['email'];
-    }
-
-    /**
-     * Take the decoded data from the user details URL and extract
-     * the user's screen name.
-     *
-     * @param mixed $data
-     * @param TokenCredentials $tokenCredentials
-     *
-     * @return string
-     */
-    public function userScreenName($data, TokenCredentials $tokenCredentials)
-    {
-        return $data['user']['username'];
-    }
-
-    /**
      * Get the authorization URL by passing in the temporary credentials
      * identifier or an object instance.
      *
@@ -158,7 +63,7 @@ class Garmin extends Server
 
         $url = $this->urlAuthorization();
         //$queryString = http_build_query($parameters);
-        $queryString = "oauth_token=".$temporaryIdentifier. "&oauth_callback=". $this->clientCredentials->getCallbackUri();
+        $queryString = "oauth_token=" . $temporaryIdentifier . "&oauth_callback=" . $this->clientCredentials->getCallbackUri();
 
         return $this->buildUrl($url, $queryString);
     }
@@ -169,8 +74,8 @@ class Garmin extends Server
      * and finally the verifier code.
      *
      * @param TemporaryCredentials $temporaryCredentials
-     * @param string               $temporaryIdentifier
-     * @param string               $verifier
+     * @param string $temporaryIdentifier
+     * @param string $verifier
      *
      * @return TokenCredentials
      */
@@ -197,7 +102,7 @@ class Garmin extends Server
         } catch (BadResponseException $e) {
             return $this->handleTokenCredentialsBadResponse($e);
         }
-        return $this->createTokenCredentials((string) $response->getBody());
+        return $this->createTokenCredentials((string)$response->getBody());
     }
 
     protected function protocolHeader($method, $uri, CredentialsInterface $credentials, array $bodyParameters = array())
@@ -222,12 +127,14 @@ class Garmin extends Server
         return $this->normalizeProtocolParameters($parameters);
     }
 
-    public function getActivitySummary(TokenCredentials $tokenCredentials, $params){
+    public function getActivitySummary(TokenCredentials $tokenCredentials, $params)
+    {
         $client = $this->createHttpClient();
-        $query = '/activities?uploadStartTimeInSeconds=1452470400&uploadEndTimeInSeconds=1452556800';
-        $headers = $this->getHeaders($tokenCredentials, 'GET', self::USER_API_URL.$query);
+        $query = http_build_query($params);
+        $query = '/activities?' . $query;
+        $headers = $this->getHeaders($tokenCredentials, 'GET', self::USER_API_URL . $query);
         try {
-            $response = $client->get(self::USER_API_URL.$query, [
+            $response = $client->get(self::USER_API_URL . $query, [
                 'headers' => $headers
             ]);
         } catch (BadResponseException $e) {
@@ -236,9 +143,29 @@ class Garmin extends Server
             $statusCode = $response->getStatusCode();
 
             throw new \Exception(
-                "Received error [$body] with status code [$statusCode] when retrieving token credentials."
+                "Received error [$body] with status code [$statusCode] when retrieving activity summary."
             );
         }
-        return  $response->getBody()->getContents();
+        return $response->getBody()->getContents();
     }
+
+    public function urlUserDetails()
+    {
     }
+
+    public function userDetails($data, TokenCredentials $tokenCredentials)
+    {
+    }
+
+    public function userUid($data, TokenCredentials $tokenCredentials)
+    {
+    }
+
+    public function userEmail($data, TokenCredentials $tokenCredentials)
+    {
+    }
+
+    public function userScreenName($data, TokenCredentials $tokenCredentials)
+    {
+    }
+}
