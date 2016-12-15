@@ -5,15 +5,15 @@ This package provides a Garmin API Client for the PHP League's [OAuth 1.0 Client
 ## Installation
 
 ```
-composer require bhupendraMp/garmin-wellness
+composer require techgyani/garmin-wellness
 ```
 
 ## Usage
 
-Usage is the same as The League's OAuth client, using `bhupendraMp\OAuth1\Client\Server\Garmin` as the provider.
+Usage is the same as The League's OAuth client, using `techgyani\OAuth1\Client\Server\Garmin` as the provider.
 
 ```php
-$server = new bhupendraMp\OAuth1\Client\Server\Garmin([
+$server = new techgyani\OAuth1\Client\Server\Garmin([
     'identifier'   => 'your-client-id',
     'secret'       => 'your-client-secret',
     'callback_uri' => 'http://callback.url/callback',
