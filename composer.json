@@ -1,6 +1,6 @@
 {
   "name": "techgyani/garmin-wellness",
-  "description" : "Oauth 1.0 adapter for garmin-wellness",
+  "description" : "Unofficial Oauth 1.0 adapter for garmin-wellness API",
   "license": "MIT",
   "require": {
     "php": ">=5.4.0",
