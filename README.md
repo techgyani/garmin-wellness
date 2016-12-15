@@ -30,7 +30,7 @@ Below are the steps to test examples :
 
 setEnv consumerKey sddsadas
 setEnv consumerSecret fdsfdsfsd
-setEnv callback_uri http://localhost/garmin-wellness/examples/garmin_callback.php
+setEnv callback_uri http://localhost/garmin-wellness/vendor/techgyani/garmin-wellness/examples/garmin_callback.php
 
 3. Now run examples/index.php in your browser. It should redirect you to the garmin server, where you need to login and authorize the application.
 4. Once authorization is done user will be redirected to examples/garmin_api_test.php. There you must see activity summary output if everything is okay.
