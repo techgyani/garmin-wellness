@@ -1,4 +1,4 @@
-# garmin-wellness adapter for Oauth 1.0 Client.
+# unofficial garmin-wellness adapter for Oauth 1.0 Client.
 
 This package provides a Garmin API Client for the PHP League's [OAuth 1.0 Client](https://github.com/thephpleague/oauth1-client).
 
@@ -22,7 +22,17 @@ $server = new techgyani\OAuth1\Client\Server\Garmin([
 
 Please refer to the Garmin wellness API for the available endpoints.
 
-Please set below two enviornment variables to run the examples.
+Below are the steps to test examples :
+```
+1. Copy examples in your web-server root if needed.
+2. Define consumerKey, consumerSecret and callback_uri enviornment variables or alternatively set them directly in all php files in example. Below is the .htaccess code to demonstrate how you may do it.
 
-consumerKey
-consumerSecret
+
+setEnv consumerKey sddsadas
+setEnv consumerSecret fdsfdsfsd
+setEnv callback_uri http://localhost/garmin-wellness/examples/garmin_callback.php
+
+3. Now run examples/index.php in your browser. It should redirect you to the garmin server, where you need to login and authorize the application.
+4. Once authorization is done user will be redirected to examples/garmin_api_test.php. There you must see activity summary output if everything is okay.
+5. You can change parameter values in examples/garmin_api_test.php because it is picking up user token from the session.
+```
