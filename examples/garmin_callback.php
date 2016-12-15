@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once '../vendor/autoload.php';
+require_once __DIR__.'/../../../../vendor/autoload.php';
 
 if (isset($_GET['oauth_token']) && isset($_GET['oauth_verifier']) && isset($_SESSION['temporary_credentials'])) {
     $server = new \techgyani\OAuth1\Client\Server\Garmin([
